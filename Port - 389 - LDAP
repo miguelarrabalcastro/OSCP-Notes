@@ -1,0 +1,14 @@
+
+```bash
+ldapsearch -x -H ldap://$IP -s base namingcontexts
+
+ldapsearch -x -H ldap://$IP -b base "DC=EGOTISTICAL-BANK,DC=LOCAL"
+```
+- Filtramos por `CN` para sacar usuarios y montar un diccionarios de posibles combinaciones
+```java
+h.smith
+hugo.smith
+hugosmith
+hsmith
+```
+
