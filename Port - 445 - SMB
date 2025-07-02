@@ -1,0 +1,20 @@
+
+```bash
+crackmapexec smb $IP
+```
+
+- Añadimos su dominio con la IP al `/etc/hosts` 
+
+```bash
+crackmapexec smb $IP --shares
+
+smbmap -H 10.10.10.175
+smbmap -H 10.10.10.175 -u "null"
+
+smbclient -L 10.10.10.175 -N   
+smbclient //10.10.11.51/Users -U 'rose' --password 'KxEPkKe6R8su'
+smbclient //10.10.11.152/Shares -N
+
+prompt off
+get archivo
+```
