@@ -1,6 +1,0 @@
-## ZIP
-
-```bash
-fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt winrm_backup.zip
-```
-
