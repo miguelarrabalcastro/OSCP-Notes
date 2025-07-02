@@ -1,0 +1,8 @@
+- En go
+```go
+go build -ldflags "-s -w" .
+
+upx kerbrute //O el binario que quieras
+```
+
+
