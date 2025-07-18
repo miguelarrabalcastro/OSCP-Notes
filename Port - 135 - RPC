@@ -19,3 +19,8 @@ rpcclient $> querygroupmem $RID
 rpcclient $> queryuser $RID
 rpcclient $> querydispinfo
 ```
+
+- Sacar usuario
+```bash
+rpcclient -U "judith.mader%judith09" 10.10.11.41 -c enumdomusers | grep -oP '\[.*?\]' | grep -v '0x'| tr -d '[]' 
+```
