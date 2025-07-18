@@ -1,0 +1,4 @@
+- Listar inspect
+```bash
+docker-inspect '{{json .}}' gitea |jq .
+```
