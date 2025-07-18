@@ -4,3 +4,21 @@
 fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt winrm_backup.zip
 ```
 
+## XLSX
+
+```bash
+office2john Access_Review.xlsx >> hash.txt
+
+
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+python3 -m venv venv 
+
+source venv/bin/activate 
+
+pip install msoffcrypto-tool 
+
+cd /mnt/NASDF017E/#Kali/HTB/Voleur_HTB
+
+python3 -m msoffcrypto -p football1 Access_Review.xlsx entschluesselt_Access_Review.xlsx
+```
