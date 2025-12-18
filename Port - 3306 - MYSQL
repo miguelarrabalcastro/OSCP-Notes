@@ -1,0 +1,5 @@
+
+```bash
+#root -> usuario por defecto
+mysql -u <insert username here> -h <IP Here> -p <password here>
+```
