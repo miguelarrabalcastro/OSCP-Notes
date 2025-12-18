@@ -17,7 +17,7 @@ rpcclient $> enumdomgroups
 
 rpcclient $> querygroupmem $RID
 rpcclient $> queryuser $RID
-rpcclient $> querydispinfo
+rpcclient $> s
 ```
 
 - Sacar usuario
