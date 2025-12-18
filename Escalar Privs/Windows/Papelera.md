@@ -14,3 +14,12 @@ $documentsPath = [Environment]::GetFolderPath("Desktop")
 $documents = (New-Object -ComObject Shell.Application).NameSpace($documentsPath)  
 $documents.MoveHere($item)
 ```
+
+
+## Ver usuarios borrados
+
+```powershell
+get-adobject -Filter {Deleted -eq $true -and ObjectClass -eq "user"} -IncludeDeletedObjects
+
+get-adobject -Filter {Deleted -eq $true -and ObjectClass -eq "user"} -IncludeDeletedObjects -Properties *
+```
