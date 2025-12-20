@@ -1,3 +1,11 @@
+- Buscar Flag:
+
+```bash
+Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinue -Force
+```
+
+
+
 - Quitar busqueda de virus
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
