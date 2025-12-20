@@ -1,5 +1,5 @@
 - https://github.com/ly4k/Certipy/wiki/06-%E2%80%90-Privilege-Escalation
-
+- https://github.com/puckiestyle/powershell
 - Limpiar
 ```bash
 127.0.0.1:8080/api/v2/clear-database
