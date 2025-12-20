@@ -28,7 +28,10 @@ sudo ip route add segmento_a_llegar/24 dev ligolo
 
 ```bash
 ./proxy -selfcert
-
+#Tras unirte a la session
+interface_create --name lligolo
+route_add --name lligolo --route 172.16.0.0/24
+tunnel_start --tun lligolo
 #En la maquina victima
 ./agent -connect MIIP:11601 -ignore-cert
 
