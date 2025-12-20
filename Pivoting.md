@@ -5,6 +5,12 @@
 ```bash
 for i in {1..255} ;do (ping -c 1 172.16.1.$i | grep  "bytes from");done
 ```
+- Subes fping y haces:
+```bash
+./fping -a -g 192.168.100.93/24 2>/dev/null 
+```
+
+
 
 - Windows
 ```powershell
