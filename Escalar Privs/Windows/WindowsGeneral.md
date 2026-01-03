@@ -36,8 +36,9 @@ upload Winpeasx64.exe
 
 - Leer historico Powershell
 ```powershell
-type AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+Get-Content "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt"
 ```
+
 
 
 - Descargar
