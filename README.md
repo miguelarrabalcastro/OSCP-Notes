@@ -4,4 +4,4 @@ Spanish Notes for OSCP 2025
 
 ## Referencias
 
-http://michalszalkowski.com/
+http://michalszalkowski.com/security/
