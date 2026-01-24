@@ -1,5 +1,8 @@
 ```bash
 davtest --url http://10.10.10.67/webdav_test_inception -auth webdav_tester:babygurl69
+
+
+cadaver http://192.168.108.122/
 ```
 
 - Tras ver que tipo de archivo puedo subir
