@@ -1,5 +1,5 @@
 
-![[Pasted image 20260119134922.png]]
+![[PG/Access/Caps/Pasted image 20260119134922.png]]
 
 ![[Pasted image 20260119135711.png]]
 
