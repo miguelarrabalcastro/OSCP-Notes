@@ -1,3 +1,4 @@
+
 - Buscar Flag:
 
 ```bash
@@ -5,6 +6,12 @@ Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinu
 ```
 
 
+- Buscar archivos:
+https://github.com/SnaffCon/Snaffler/releases/tag/1.0.244
+
+```bash
+.\Snaffler.exe -s -o C:\Windows\Temp\snaffler.log -i C:\
+```
 
 - Quitar busqueda de virus
 ```powershell
