@@ -7,7 +7,7 @@ Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinu
 
 - buscar
 ```bash
-Get-ChildItem -Path C: -Include *.ps1*,*.txt*,*.exe*,*.log*,*.ini*,*.kdbx*,*.pdf*,*.xls*,*.xlsx*,*.doc*,*.docx* -File -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Path C: -Include *.ps1*,*.txt*,*.exe*,*.log*,*.ini*,*.kdbx*,*.pdf*,*.xls*,*.xlsx*,*.doc*,*.json*,*.kdbx*,*.kdb*,*.env*,*.docx* -File -Recurse -ErrorAction SilentlyContinue
 ```
 
 - Buscar archivos:
