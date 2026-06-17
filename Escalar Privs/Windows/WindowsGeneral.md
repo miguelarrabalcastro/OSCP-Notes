@@ -5,6 +5,10 @@
 Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinue -Force
 ```
 
+- buscar
+```bash
+Get-ChildItem -Path C: -Include *.ps1*,*.txt*,*.exe*,*.log*,*.ini*,*.kdbx*,*.pdf*,*.xls*,*.xlsx*,*.doc*,*.docx* -File -Recurse -ErrorAction SilentlyContinue
+```
 
 - Buscar archivos:
 https://github.com/SnaffCon/Snaffler/releases/tag/1.0.244
