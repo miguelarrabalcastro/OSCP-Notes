@@ -1,9 +1,12 @@
 # TAMPERS
 
 ```bash
---tamper=space2comment,between,equaltolike,randomcase
+--tamper=space2comment,between,equaltolike,randomcase,commalessmid,commalesslimit
 ```
 
+# RCE
+
+https://medium.com/@Shatha511/chaining-sqli-into-rce-a-lab-case-study-23590bb23a3a
 
 ## MANUAL
 
