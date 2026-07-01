@@ -2,7 +2,7 @@
 - Buscar Flag:
 
 ```bash
-Get-ChildItem -Path C:\ -Recurse -Filter "flag.txt" -ErrorAction SilentlyContinue -Force
+Get-ChildItem -Path C:\ -Recurse -Filter "local.txt" -ErrorAction SilentlyContinue -Force
 ```
 
 - Buscar info
@@ -11,10 +11,16 @@ paste -sd, users | sed 's/[^,]*/"&"/g'
 
 #Luego
 
-Get-ChildItem -Path C:\ -Recurse -Force -Include *.config,*.ini,*.xml,*.bak,*.txt,*.ps1,*.log,*.json,*.yml,*.yaml,*.env,*.cs,*.vb,*.vbs,*.key,*.pem,*.crt,*.rdp,*.kdbx -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notmatch '(C:\\Windows)' } | Select-String -Pattern "pwd=", "password=", "username=", "user=", "pass=", OUTPUT_ANTERIOR
+Get-ChildItem -Path C:\ -Recurse -Force -Include *.config,*.ini,*.xml,*.bak,*.txt,*.ps1,*.log,*.json,*.ym  
+l,*.yaml,*.env,*.cs,*.vb,*.vbs,*.key,*.pem,*.crt,*.rdp,*.kdbx -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName  
+-notmatch '(C:\\Windows|C:\\Windows\\System32\\|C:\\Documents and Settings\\All Users\\|C:\\Documents and Settings\\Brian\\|C:\\Users\\eknight\\AppData\\Local\\Microsoft\\Windows\\|C:\\Documents and Settings\\eknight\\|C:\\Documents and Settings\\|C:\\Program Files\\Common Files\\|C:\\Program Files\\WindowsApps\\|C:\\Program Files\\Windows Defender Advanced Threat Protection\\|C:\\Program Files\\Windows NT\\)' } | Select-String -Pattern "pwd=", "password=", "username=", "user=", "pass=",  
+"lbennett","administrator","David","RAS","Matt","mjohnson","egreen","spatel","dreyes","nflores","clee","otran","zmiller","mro  
+ss","twest","eknight","mthompson"
 ```
 
 - Buscar archivos:
+
+https://github.com/alessandroz/lazagne
 https://github.com/SnaffCon/Snaffler/releases/tag/1.0.244
 
 ```bash
