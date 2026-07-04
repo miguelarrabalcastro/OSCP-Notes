@@ -16,6 +16,7 @@ smbmap -H 10.10.10.175 -u "null" -r Dir
 
 
 smbclient -L 10.10.10.175 -N
+smbclient //192.168.232.141/setup -U 'oscp.exam\Eric.Wallows'
 smbclient //10.10.11.51/Users -U 'rose' --password 'KxEPkKe6R8su'
 smbclient //10.10.11.152/Shares -N
 
